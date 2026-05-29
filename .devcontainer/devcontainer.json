@@ -1,34 +1,43 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
-	"name": "A and B Wedding Website",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:4-24-trixie",
+  "name": "A and B Wedding Website",
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces",
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+  "forwardPorts": [5000, 5173],
+  "portsAttributes": {
+    "5000": {
+      "label": "Flask Backend",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "React Frontend",
+      "onAutoForward": "notify"
+    }
+  },
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
-
-	// Configure tool-specific properties.
-	"customizations": {
+  "customizations": {
     "vscode": {
-      "settings": {},
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+      },
       "extensions": [
-            "streetsidesoftware.code-spell-checker",
-            "eamodio.gitlens",
-            "PKief.material-icon-theme",
-            "esbenp.prettier-vscode",
-            "rvest.vs-code-prettier-eslint",
-            "ritwickdey.LiveServer"
-        ]
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens",
+        "PKief.material-icon-theme",
+        "esbenp.prettier-vscode",
+        "rvest.vs-code-prettier-eslint",
+        "ms-azuretools.vscode-docker",
+        "aaron-bond.better-comments",
+        "njpwerner.autodocstring",
+        "tamasfe.even-better-toml",
+        "william-voyek.vscode-nginx",
+        "kevinrose.vsc-python-indent"
+      ]
     }
   }
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
