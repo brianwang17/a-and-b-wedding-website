@@ -16,7 +16,14 @@
       "onAutoForward": "notify"
     }
   },
-
+  "mounts": [
+    "source=project-frontend-node_modules,target=${containerWorkspaceFolder}/services/frontend/node_modules,type=volume",
+    "source=project-backend-venv,target=${containerWorkspaceFolder}/services/backend/.venv,type=volume"
+  ],
+  "remoteEnv": {
+    "POETRY_VIRTUALENVS_IN_PROJECT": "true"
+  },
+  "postCreateCommand": "sudo chown -R vscode:vscode /workspaces/services/frontend/node_modules /workspaces/services/backend/.venv && cd /workspaces/services/frontend && yarn install && cd /workspaces/services/backend && poetry install --no-interaction --no-ansi",
   "customizations": {
     "vscode": {
       "settings": {
@@ -36,7 +43,8 @@
         "njpwerner.autodocstring",
         "tamasfe.even-better-toml",
         "william-voyek.vscode-nginx",
-        "kevinrose.vsc-python-indent"
+        "kevinrose.vsc-python-indent",
+        "anthropic.claude-code"
       ]
     }
   }
